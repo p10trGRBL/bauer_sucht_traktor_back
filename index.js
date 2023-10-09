@@ -4,7 +4,7 @@ import { errorHandler } from './middleware/ErrorHandler.js';
 import tractorsRoutes from './routes/tractorsRoutes.js';
 
 const app = express();
-const PORT = process.env.PORT||3030;
+const PORT = process.env.PORT||8080;
 
 
 app.use(express.json());
@@ -15,4 +15,4 @@ app.use(errorHandler);
 
 
 
-app.listen(port, ()=>console.log(`Server is listening on ${PORT}`));
+app.listen(PORT, ()=>console.log(`Server is listening on ${PORT}`));
