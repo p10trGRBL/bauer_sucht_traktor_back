@@ -30,6 +30,10 @@ const tractorSchema = new mongoose.Schema({
         type: [String],
         default: 'new',
     },
+    location: {
+        type: String,
+        required: [true, 'Sag uns wo dein Schlepper zur Verfügung steht']
+    },
     availableFrom: {
         type: Date,
         required: [true, 'Das Start Datum ist erforderlich']
