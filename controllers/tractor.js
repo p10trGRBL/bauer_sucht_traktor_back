@@ -37,12 +37,12 @@ export const getAllTractors = async (req, res, next) => {
 
 export const addNewTractor = async (req, res, next) => {
     try {
-        const {brand, model, productionYear, power, image_url, extras, availableFrom, availableTo, tags, price, publishedDate } = req.body;
+        const {brand, model, productionYear, power, image_url, extras, availableFrom, availableTo, tags, price, publishedDate, location } = req.body;
         // const newBook = new Book({name, author, image_url, tags, publishedDate})
         // const savedBook = await newBook.save();
         // res.status(201).json(savedBook);
         const newTractor = await Tractor.create(
-            {brand, model, productionYear, power, image_url, extras, availableFrom, availableTo, tags, price, publishedDate } );
+            {brand, model, productionYear, power, image_url, extras, availableFrom, availableTo, tags, price, publishedDate, location } );
         res.status(201).json(newTractor);
     } catch (error) {
         next(error);
@@ -53,10 +53,10 @@ export const addNewTractor = async (req, res, next) => {
 
 export const updateTractor = async (req, res, next) => {
     const {id} = req.params;
-    const {brand, model, productionYear, power, image_url, extras, availableFrom, availableTo, tags, price, publishedDate }= req.body;
+    const {brand, model, productionYear, power, image_url, extras, availableFrom, availableTo, tags, price, publishedDate, location }= req.body;
     try {
         const updatedTractor = await Tractor.findByIdAndUpdate(id, 
-            {brand, model, productionYear, power, image_url, extras, availableFrom, availableTo, tags, price, publishedDate }, 
+            {brand, model, productionYear, power, image_url, extras, availableFrom, availableTo, tags, price, publishedDate, location }, 
             {new: true});
         if(!updatedTractor) { throw {statusCode: 404, message: 'Schlepper nicht gefunden'}}
         res.json(updatedTractor);
