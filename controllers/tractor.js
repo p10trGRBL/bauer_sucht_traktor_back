@@ -103,7 +103,7 @@ export const addExtraToTractor = async (req, res, next) => {
 export const deleteTractor = async (req, res, next) => {
  const {id} = req.params;
 try {
-    const deletedTractor = Tractor.findByIdAndDelete(id);
+    const deletedTractor = await Tractor.findByIdAndDelete(id);
 if(!deletedTractor) {throw {statusCode: 404, message: 'Schlepper nicht gefunden'}}
 res.status(200).json({message: "Schlepper gelöscht!"});
 
