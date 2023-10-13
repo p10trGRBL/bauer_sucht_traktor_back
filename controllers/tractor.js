@@ -98,7 +98,7 @@ export const addExtraToTractor = async (req, res, next) => {
     }
 }
 
-
+//check if it works
 //delete a tractor
 export const deleteTractor = (req, res, next) => {
  const {id} = req.params;
