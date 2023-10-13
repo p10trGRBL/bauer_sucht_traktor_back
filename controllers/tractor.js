@@ -100,7 +100,7 @@ export const addExtraToTractor = async (req, res, next) => {
 
 //check if it works
 //delete a tractor
-export const deleteTractor = (req, res, next) => {
+export const deleteTractor = async (req, res, next) => {
  const {id} = req.params;
 try {
     const deletedTractor = Tractor.findByIdAndDelete(id);
