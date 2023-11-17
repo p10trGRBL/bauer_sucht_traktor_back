@@ -33,8 +33,9 @@ const newUser = await User.create({
 });
 
 const token = jwt.sign({uid: newUser._id}, process.env.JWT_SECRET);
-res.status(201).send({token});
-
+// sending token upon registration (not needed with cookie)
+//res.status(201).send({token});
+res.status(200).send({status: 'success'})
 });
 
 // SignIn
@@ -48,11 +49,20 @@ export const signIn = asyncHandler(async(req, res, next)=>{
     if(!match) throw new ErrorResponse('Password is incorrect', 401);
 
     const token = jwt.sign({uid: existingUser._id}, process.env.JWT_SECRET);
-    res.status(200).send({token});
+    // cookie instead of token:
+    // res.status(200).send({token});
+    res.cookie('token', token, { httpOnly: true, maxAge: 1800000 }) //30 min. secure: true - https
+    res.status(200).send({status: 'success'});
 })
 
 //User Info
 export const getUser = asyncHandler(async(req,res, next)=>{
     const user = await User.findById(req.uid);
     res.json(user);
+});
+
+// cookie deleted after logout
+export const logout = asyncHandler(async(req, res, next)=>{
+    res.clearCookie('token');
+    res.status(200).send({status: 'success'});
 });
