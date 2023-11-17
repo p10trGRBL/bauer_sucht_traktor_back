@@ -1,20 +1,22 @@
 import express from 'express';
 import * as tractorController from '../controllers/tractor.js';
+import verifyToken from '../middleware/verifyToken.js';
+
 
 
 const tractorsRouter = express.Router();
 tractorsRouter
 .route('/')
 .get(tractorController.getAllTractors)
-.post(tractorController.addNewTractor);
+.post(verifyToken, tractorController.addNewTractor);
 
 tractorsRouter
 .route('/:id')
 .get(tractorController.getTractorById)
-.put(tractorController.updateTractor)
-.delete(tractorController.deleteTractor);
+.put(verifyToken, tractorController.updateTractor)
+.delete(verifyToken, tractorController.deleteTractor);
 
-tractorsRouter.route('/:id/addTag').patch(tractorController.addTagToTractor);
-tractorsRouter.route('/:id/addExtra').patch(tractorController.addExtraToTractor);
+tractorsRouter.route('/:id/addTag').patch(verifyToken, tractorController.addTagToTractor);
+tractorsRouter.route('/:id/addExtra').patch(verifyToken, tractorController.addExtraToTractor);
 
 export default tractorsRouter;
