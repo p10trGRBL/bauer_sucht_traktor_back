@@ -51,7 +51,11 @@ export const signIn = asyncHandler(async(req, res, next)=>{
     const token = jwt.sign({uid: existingUser._id}, process.env.JWT_SECRET);
     // cookie instead of token:
     // res.status(200).send({token});
-    res.cookie('token', token, { httpOnly: true, maxAge: 1800000 }) //30 min. secure: true - https
+    res.cookie('token', token, { 
+        httpOnly: true, 
+        sameSite: "None",
+        secure: true,
+        maxAge: 1800000 }) //30 min. secure: true - https
     res.status(200).send({status: 'success'});
 })
 
@@ -63,6 +67,10 @@ export const getUser = asyncHandler(async(req,res, next)=>{
 
 // cookie deleted after logout
 export const logout = asyncHandler(async(req, res, next)=>{
-    res.clearCookie('token');
+    res.clearCookie('token', {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+    });
     res.status(200).send({status: 'success'});
 });
