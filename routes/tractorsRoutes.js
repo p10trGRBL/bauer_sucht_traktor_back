@@ -14,7 +14,7 @@ tractorsRouter
 .route('/:id')
 .get(tractorController.getTractorById)
 .put(verifyToken, tractorController.updateTractor)
-.delete(tractorController.deleteTractor);
+.delete(verifyToken, tractorController.deleteTractor);
 
 tractorsRouter.route('/:id/addTag').patch(verifyToken, tractorController.addTagToTractor);
 tractorsRouter.route('/:id/addExtra').patch(verifyToken, tractorController.addExtraToTractor);
