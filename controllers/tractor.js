@@ -142,7 +142,7 @@ export const addExtraToTractor = async (req, res, next) => {
 // };
 export const deleteTractor = asyncHandler(async(req, res, next)=>{
     const {
-        body, 
+        
         params: {id},
         uid
     } = req;
@@ -151,6 +151,6 @@ export const deleteTractor = asyncHandler(async(req, res, next)=>{
     if(!found) throw new ErrorResponse(`Schlepper mit ID ${id} nicht gefunden`, 404);
     if(uid !== found.owner.toString()) throw new ErrorResponse('Keine Berechtigung', 401);
 
-    const deletedTractor = await Tractor.findByIdAndDelete(id, body, {new: true}).populate('owner');
+    const deletedTractor = await Tractor.findByIdAndDelete(id, {new: true}).populate('owner');
     res.json({success: `Schlepper mit ID ${id} wurde erfolgreich gelöscht!`});
 });
