@@ -13,7 +13,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://bauer-sucht-traktor.netlify.app/",
+      "https://bauer-sucht-traktor.netlify.app",
     ],
     credentials: true,
   })
