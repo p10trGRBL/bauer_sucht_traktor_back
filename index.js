@@ -9,7 +9,15 @@ import cookieParser from "cookie-parser";
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://bauer-sucht-traktor.netlify.app/",
+    ],
+    credentials: true,
+  })
+);
 //
 //app.use(cors({origin: 'https://production-website.com' }));
 
